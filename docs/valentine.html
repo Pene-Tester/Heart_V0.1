@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Yay! You Said YES 💖</title>
+
+    <!-- Match typography with index page -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body class="page page--reveal">
+    <div class="floating-hearts floating-hearts--soft" aria-hidden="true">
+      <span class="heart">♥</span>
+      <span class="heart">♥</span>
+      <span class="heart">♥</span>
+      <span class="heart">♥</span>
+      <span class="heart">♥</span>
+    </div>
+
+    <main class="card card--reveal">
+      <h1 class="card__title card__title--reveal">
+        Yay! You said YES 💖
+      </h1>
+
+      <section class="gallery" aria-label="Our cute memories">
+        <div class="gallery__grid" id="galleryTrack">
+          <figure class="gallery__item">
+            <img src="./assets/image/img1.jpg" alt="Valentine memory 1" loading="lazy" />
+          </figure>
+          <figure class="gallery__item">
+            <img src="./assets/image/img2.jpg" alt="Valentine memory 2" loading="lazy" />
+          </figure>
+          <figure class="gallery__item">
+            <img src="./assets/image/img3.jpg" alt="Valentine memory 3" loading="lazy" />
+          </figure>
+          <figure class="gallery__item">
+            <img src="./images/img4.jpg" alt="Valentine memory 4" loading="lazy" />
+          </figure>
+          <figure class="gallery__item">
+            <img src="./images/img5.jpg" alt="Valentine memory 5" loading="lazy" />
+          </figure>
+        </div>
+        <div class="gallery__dots" id="galleryDots" aria-hidden="true">
+          <button class="gallery__dot gallery__dot--active" type="button" data-index="0"></button>
+          <button class="gallery__dot" type="button" data-index="1"></button>
+          <button class="gallery__dot" type="button" data-index="2"></button>
+          <button class="gallery__dot" type="button" data-index="3"></button>
+          <button class="gallery__dot" type="button" data-index="4"></button>
+        </div>
+      </section>
+
+      <section class="message">
+        <p class="message__text">
+          Happy Valentine’s Day, my yabbyy 💕<br />
+          Thank you for always making me smile.<br />
+          I love you so much—my wife, my baby dragon, and my baby girl.<br />
+          I’m really lucky to have you.<br />
+          I hope you had a wonderful day.<br />
+          I choose you always and forever, from your baby boy koala 💖<br />
+          I love you 3000 💖
+        </p>
+      </section>
+    </main>
+
+    <script src="./js/script.js"></script>
+  </body>
+</html>
+
