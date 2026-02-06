@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Sneaky NO button on the first page (with speed boost + 💨 dash)
   if (noBtn) {
-    var hasMovedOnce = false;
     var escapeCount = 0;
     var pendingMove = null;
 
@@ -22,12 +21,6 @@ document.addEventListener('DOMContentLoaded', function () {
       }
 
       var parent = noBtn.parentElement || document.body;
-
-      if (!hasMovedOnce) {
-        parent.style.position = parent.style.position || 'relative';
-        noBtn.style.position = 'absolute';
-        hasMovedOnce = true;
-      }
 
       escapeCount += 1;
 
@@ -55,6 +48,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
         noBtn.style.left = randomX + 'px';
         noBtn.style.top = randomY + 'px';
+        // Clear initial centering transform so size stays like YES
+        noBtn.style.transform = 'none';
 
         // Little dash emoji after it escapes
         var dash = document.createElement('span');
