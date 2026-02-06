@@ -107,6 +107,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // Simple slideshow for the reveal page
   var track = document.getElementById('galleryTrack');
   var dotsContainer = document.getElementById('galleryDots');
+  var bgMusic = document.getElementById('bgMusic');
 
   if (track && dotsContainer) {
     var slides = Array.prototype.slice.call(track.querySelectorAll('.gallery__item'));
@@ -116,6 +117,50 @@ document.addEventListener('DOMContentLoaded', function () {
     var isTouching = false;
     var autoTimer = null;
     var AUTO_DELAY = 3500;
+
+    // Soft background music handling (only on reveal page)
+    if (bgMusic) {
+      bgMusic.volume = 0.6;
+      var FADE_START_TIME = 120; // Start fading at 2 minutes (120 seconds)
+      var FADE_DURATION = 3; // Fade out over 3 seconds
+      var isFading = false;
+
+      // Fade out music when it reaches 2 minutes
+      bgMusic.addEventListener('timeupdate', function () {
+        if (!isFading && bgMusic.currentTime >= FADE_START_TIME) {
+          isFading = true;
+          var startVolume = bgMusic.volume;
+          var startTime = Date.now();
+
+          var fadeInterval = setInterval(function () {
+            var elapsed = (Date.now() - startTime) / 1000; // seconds
+            var progress = Math.min(elapsed / FADE_DURATION, 1);
+            bgMusic.volume = startVolume * (1 - progress);
+
+            if (progress >= 1) {
+              bgMusic.pause();
+              clearInterval(fadeInterval);
+            }
+          }, 50); // Update every 50ms for smooth fade
+        }
+      });
+
+      // Try autoplay; some browsers may block it until interaction
+      bgMusic
+        .play()
+        .catch(function () {
+          // Fallback: start music on first user interaction
+          var startMusicOnce = function () {
+            bgMusic.play().catch(function () {
+              // ignore if still blocked
+            });
+            window.removeEventListener('click', startMusicOnce);
+            window.removeEventListener('touchstart', startMusicOnce);
+          };
+          window.addEventListener('click', startMusicOnce, { once: true });
+          window.addEventListener('touchstart', startMusicOnce, { once: true });
+        });
+    }
 
     function restartAuto() {
       if (autoTimer) {
@@ -148,12 +193,24 @@ document.addEventListener('DOMContentLoaded', function () {
       currentIndex = index;
       // Fade between slides by toggling active class
       slides.forEach(function (slide, i) {
+        var video = slide.querySelector && slide.querySelector('video');
         if (i === index) {
           slide.classList.add('gallery__item--active');
           slide.setAttribute('aria-hidden', 'false');
+          if (video) {
+            // Autoplay video only when slide is active (muted + playsinline)
+            try {
+              video.play();
+            } catch (e) {
+              // Ignore autoplay errors (browser policies)
+            }
+          }
         } else {
           slide.classList.remove('gallery__item--active');
           slide.setAttribute('aria-hidden', 'true');
+          if (video) {
+            video.pause();
+          }
         }
       });
       updateDots(index);

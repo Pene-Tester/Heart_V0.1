@@ -38,10 +38,21 @@
           <figure class="gallery__item">
             <img src="./assets/image/img2.jpg" alt="Valentine memory 2" loading="lazy" />
           </figure>
-          <figure class="gallery__item">
-            <img src="./assets/image/img3.jpg" alt="Valentine memory 3" loading="lazy" />
+          <figure class="gallery__item gallery__item--video">
+            <video
+              class="gallery__video"
+              muted
+              loop
+              playsinline
+              preload="metadata"
+              aria-label="Valentine memory video 3"
+            >
+              <source src="./assets/image/vid1.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+            <figcaption class="gallery__caption">ito ung first vid at pic natin😁</figcaption>
           </figure>
-          <figure class="gallery__item">
+          <figure class="gallery__item gallery__item--contain">
             <img src="./assets/image/img4.jfif" alt="Valentine memory 4" loading="lazy" />
           </figure>
           <figure class="gallery__item">
@@ -69,6 +80,9 @@
         </p>
       </section>
     </main>
+
+    <!-- Background music (update src to your real file in the music folder) -->
+    <audio id="bgMusic" class="bg-music" src="./assets/music/bg_memories.mp3" loop></audio>
 
     <script src="./js/script.js"></script>
   </body>
