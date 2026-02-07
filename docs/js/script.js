@@ -2,10 +2,63 @@ document.addEventListener('DOMContentLoaded', function () {
   var yesBtn = document.getElementById('yesBtn');
   var noBtn = document.getElementById('noBtn');
 
-  // YES button → go to reveal page
+  // Passcode step after she clicks Yes (change PASSCODE to your secret!)
+  var PASSCODE = '033125';
+  var passcodeOverlay = document.getElementById('passcodeOverlay');
+  var passcodeForm = document.getElementById('passcodeForm');
+  var passcodeInput = document.getElementById('passcodeInput');
+  var passcodeError = document.getElementById('passcodeError');
+  var passcodeCancel = document.getElementById('passcodeCancel');
+
+  function showPasscodeModal() {
+    if (!passcodeOverlay) return;
+    passcodeOverlay.classList.remove('passcode-overlay--hidden');
+    passcodeOverlay.setAttribute('aria-hidden', 'false');
+    passcodeError.textContent = '';
+    if (passcodeInput) {
+      passcodeInput.value = '';
+      passcodeInput.focus();
+    }
+  }
+
+  function hidePasscodeModal() {
+    if (!passcodeOverlay) return;
+    passcodeOverlay.classList.add('passcode-overlay--hidden');
+    passcodeOverlay.setAttribute('aria-hidden', 'true');
+  }
+
+  // YES button → show passcode modal instead of going straight to reveal
   if (yesBtn) {
     yesBtn.addEventListener('click', function () {
-      window.location.href = 'valentine.html';
+      showPasscodeModal();
+    });
+  }
+
+  if (passcodeForm) {
+    passcodeForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var entered = (passcodeInput && passcodeInput.value) ? passcodeInput.value.trim() : '';
+      if (entered === PASSCODE) {
+        hidePasscodeModal();
+        window.location.href = 'valentine.html';
+      } else {
+        passcodeError.textContent = 'Wrong passcode. Try again? 💕';
+        passcodeInput.classList.add('passcode-input--error');
+        if (passcodeInput) passcodeInput.focus();
+      }
+    });
+  }
+
+  if (passcodeInput) {
+    passcodeInput.addEventListener('input', function () {
+      passcodeInput.classList.remove('passcode-input--error');
+      passcodeError.textContent = '';
+    });
+  }
+
+  if (passcodeCancel) {
+    passcodeCancel.addEventListener('click', function () {
+      hidePasscodeModal();
     });
   }
 

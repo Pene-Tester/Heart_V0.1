@@ -535,3 +535,128 @@ body {
   }
 }
 
+/* Passcode overlay & modal (after she clicks Yes) */
+
+.passcode-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(74, 31, 51, 0.5);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.passcode-overlay--hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.passcode-overlay .passcode-modal {
+  max-width: 340px;
+  animation: passcodeIn 0.35s ease-out;
+}
+
+@keyframes passcodeIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.92) translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.passcode-modal__title {
+  margin: 0 0 6px;
+  font-size: 1.35rem;
+  font-weight: 700;
+  text-align: center;
+  background: linear-gradient(120deg, #ff4f8b, #ff9ac2);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.passcode-modal__hint {
+  margin: 0 0 16px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: rgba(74, 31, 51, 0.85);
+}
+
+.passcode-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.passcode-input {
+  width: 100%;
+  padding: 12px 16px;
+  font-family: inherit;
+  font-size: 1rem;
+  border: 2px solid var(--color-accent);
+  border-radius: var(--radius-card);
+  background: #fff;
+  color: var(--color-text-main);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.passcode-input::placeholder {
+  color: rgba(74, 31, 51, 0.5);
+}
+
+.passcode-input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 4px rgba(255, 79, 139, 0.2);
+}
+
+.passcode-input--error {
+  border-color: #e91e63;
+  animation: passcodeShake 0.4s ease;
+}
+
+@keyframes passcodeShake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-6px); }
+  40% { transform: translateX(6px); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(4px); }
+}
+
+.passcode-error {
+  margin: 0;
+  font-size: 0.88rem;
+  color: #c2185b;
+  text-align: center;
+  min-height: 1.2em;
+}
+
+.passcode-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 4px;
+}
+
+.btn--passcode-cancel {
+  background: #fff5fb;
+  color: var(--color-primary);
+  border: 1px solid var(--color-accent);
+}
+
+.btn--passcode-cancel:hover,
+.btn--passcode-cancel:focus-visible {
+  background: #fff2fa;
+}
+

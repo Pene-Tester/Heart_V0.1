@@ -44,6 +44,29 @@
       </p>
     </main>
 
+    <!-- Passcode overlay (shown after she clicks Yes) -->
+    <div class="passcode-overlay passcode-overlay--hidden" id="passcodeOverlay" aria-hidden="true">
+      <div class="passcode-modal card">
+        <h2 class="passcode-modal__title">One more step 💕</h2>
+        <p class="passcode-modal__hint">Enter the secret passcode to continue…</p>
+        <form class="passcode-form" id="passcodeForm" novalidate>
+          <input
+            type="password"
+            class="passcode-input"
+            id="passcodeInput"
+            placeholder="Passcode"
+            autocomplete="off"
+            aria-label="Secret passcode"
+          />
+          <p class="passcode-error" id="passcodeError" aria-live="polite"></p>
+          <div class="passcode-actions">
+            <button type="button" class="btn btn--passcode-cancel" id="passcodeCancel">Cancel</button>
+            <button type="submit" class="btn btn--yes">Unlock 💖</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
     <script src="./js/script.js"></script>
   </body>
 </html>
